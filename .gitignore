@@ -1,0 +1,9 @@
+.DS_Store
+dingo.pdf
+dingo-manual-*.pdf
+*.aux
+*.log
+*.toc
+*.out
+*.swp
+*.gz
