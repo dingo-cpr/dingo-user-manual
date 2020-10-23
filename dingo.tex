@@ -11,8 +11,8 @@
 \usepackage{float}
 \usepackage{fancyhdr}
 \pagestyle{fancyplain}
-\lfoot{Rev. 1.0.0}
-\rfoot{Dingo UGV}
+\lfoot{Rev. 1.1.0}
+\rfoot{Dingo}
 \lhead{}
 \chead{}
 \rhead{}
@@ -80,7 +80,7 @@ wheels (Dingo-D) or \SI{101.6}{\mm} diameter mechanum wheels (Dingo-O), human ma
 \end{figure}
 
 The HMI panel is shown in
-\autoref{hmi}, and includes from left: motor button, comms indictor, wifi indicator, battery
+\autoref{hmi}, and includes from left: motor stop button, comms indictor, wifi indicator, battery
 indicator, and system power button.
 
 \begin{figure}[ht]
@@ -360,6 +360,48 @@ be subject to normal cabin temperatures and pressures.
 
 Please contact Clearpath Robotics for additional information about Dingo's batteries or
 for information about purchasing additional batteries.
+
+
+\section{Safety Considerations}
+
+Dingo is a fast moving robotic platform. Please read the following notices carefully.
+
+\subsection{General Warnings}
+
+Dingo is a rugged and high-performance vehicle. For the safety of yourself and others, always conduct initial experiments and software development with the vehicle raised off the ground. Place a wooden crate, a set of sawhorses, a sturdy storage tub, or any other solid flat structure having a height greater than 6 inches under Dingo to keep the wheels clear of the ground (“up on blocks”).
+
+When starting out, favor slower wheel speeds. Dingo's control loops can accurately maintain velocities as low as 0.1 m/s. Operating at such speeds will give you more time to react if things don’t go quite as you expect.
+
+\subsection{Stop Buttons}
+
+The motor stop button \raisebox{-0.4em}{\includegraphics[width=0.5cm]{icon-motor.pdf}} is located on the HMI Panel at the back of Dingo. To engage Stop Mode, press the motor stop button once; you should see that the green LED by the motor stop button is flashing and that all four corner LEDs are flashing red. To disengage Stop Mode, press the motor stop button again; all LEDs should return to their original values.
+
+When in Stop Mode, the Dingo will not drive. The commands received while in Stop Mode are not buffered; Dingo will always act on the latest commands received. This means that if the commands are stopped before the motor stop button is pressed to disengage Stop Mode, the Dingo will not move. If the commands are continued, Dingo will move at the speed commanded once the motor stop button is pressed to disengage Stop Mode.
+
+Ensure that the motor stop button is accessible at all times. Avoid mounting payloads that extend over the rear of Dingo and would block access to the motor stop button.
+
+Note that the Dingo MCU board does provide a breakout to allow an external stop button/switch to be integrated by the end user, which could be used to engage/disengage Stop Mode. Please inquire with Clearpath Robotics for details on adding an external stop button/switch. See \nameref{contact} on page \pageref{contact} for contact information.
+
+\subsection{Electrical System}
+
+Dingo is powered by batteries capable of delivering over 2000W for short durations. This gives Dingo's motors their great performance; however, it is also enough power to cause severe bodily harm. Always use caution when operating Dingo to avoid personal injury or property damage.  To ensure safety, please observe the following precautions:
+
+\begin{itemize}[nolistsep]
+	\item Do not tamper with the battery terminals or wiring.
+	\item Do not tamper with the fuses, except to check and change the fuses.
+	\item Always replace fuses with the same type and rating to ensure continued protection against risk of fires.
+	\item Consult Clearpath Robotics support if you need to service the batteries.
+	\item Do not lay tools or other objects on top of the batteries.
+	\item Charge the battery only with the charger provided by Clearpath Robotics.
+	\item Please dispose of the batteries properly or return them to Clearpath Robotics to do so.
+\end{itemize}
+
+\subsection{Lifting and Transport}
+
+\begin{itemize}[nolistsep]
+	\item Ensure that Dingo's Stop Mode is engaged when transporting short distances and powered off when transporting longer distances
+	\item Do not push the robot at more than 0.5 m/s (1.6 ft/s) or damage to the motor controls may occur.
+\end{itemize}
 
 
 \section{Payload Integration Guide}
