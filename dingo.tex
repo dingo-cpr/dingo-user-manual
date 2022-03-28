@@ -30,7 +30,7 @@
 \section{Introduction}
 
 Dingo is a lightweight and easy-to-use unmanned indoor ground vehicle for ROS
-Melodic, presented by Clearpath Robotics.
+Noetic, presented by Clearpath Robotics.
 
 Dingo includes a standard internal PC, as well as basic IMU. Standard
 perception modules are available, including URDF and simulator integration, as well as demonstration applications.
@@ -212,24 +212,49 @@ You will be promoted to enter a password.  The default password is \lstinline{cl
 
 \subsubsection{Connect Dingo to Wireless Network}
 
-Now that you're connected via SSH over a wired connection, you can setup Dingo to connect to a local wifi network.  To do this, you will use the wireless interface configuration daemon (WICD) - a preinstalled network manager.
+Now that you're connected via SSH over a wired connection, you can setup Dingo to connect to a local wifi network. To do this, you will need to use Netplan - a preinstalled network configuration tool.
 
 In a terminal window, execute the following command:
 
 \begin{lstlisting}
-wicd-curses
+sudo nano /etc/netplan/60-wireless.yaml
 \end{lstlisting}
 
-You should see a browsable list of networks which the robot has detected. Use arrow keys to select the one you would like to connect to, and then press the right arrow to configure it. You can enter your network’s password near the bottom of the page, and note that you must select the correct encryption scheme; most modern networks use WPA1/2 Passphrase, so if that’s you, make sure that option is selected. You also likely want to select the option to automatically reconnect to this network, so that Dingo will be there for you on your wireless automatically in the future.
+This will create an empty YAML file called \textbf{60-wireless.yaml} which you will populate to configure Dingo's wireless networking via Netplan.
 
-When you’re finished, press \textbf{F10} to save, and then \textbf{C} to connect.  Dingo is now connected to wifi!
+Copy and paste the following into the empty file you just created:
+
+\begin{lstlisting}
+network:
+  wifis:
+    WIRELESS_INTERFACE:
+      optional: true
+      access-points:
+        SSID_GOES_HERE:
+          password: PASSWORD_GOES_HERE
+      dhcp4: true
+      dhcp4-overrides:
+        send-hostname: true
+\end{lstlisting}
+
+Modify the following variables in the file. Replace \lstinline{WIRELESS_INTERFACE} with the name of Dingo's wifi interface (e.g. wlan0, wlp2s0, or wlp3s0). Replace \lstinline{SSID_GOES_HERE} with the name of the local wifi network. Replace \lstinline{PASSWORD_GOES_HERE} with the password of the local wifi network. 
+
+Once you are done modifying the file, save it by pressing \textbf{CTRL + O}, then \textbf{ENTER}. Close the file by pressing \textbf{CTRL + X}.
+
+Apply your new Netplan configuration and bring up the wifi connection.
+
+In a terminal window, execute the following command:
+
+\begin{lstlisting}
+sudo netplan apply
+\end{lstlisting}
 
 While you're still wired to Dingo, you'll need to identify the IP address of Dingo's wireless connection.
 
 In a terminal window, execute:
 
 \begin{lstlisting}
-ifconfig
+ip a
 \end{lstlisting}
 
 A list of network connections will be displayed within the terminal.  Locate the wireless network and make note of its IP address. Now that you know Dingo's wireless IP address, you may now exit the ethernet SSH session by executing \lstinline{exit}.
@@ -302,12 +327,12 @@ For help troubleshooting a multiple machines connectivity issue, see:
 To command or observe Dingo from your desktop computer, first set up a basic
 ROS installation. See the following page for details:
 
-\url{http://wiki.ros.org/melodic/installation/ubuntu}
+\url{http://wiki.ros.org/noetic/installation/ubuntu}
 
 When your ROS install is set up, install the Dingo desktop packages:
 
 \begin{lstlisting}
-sudo apt-get install ros-melodic-dingo-desktop
+sudo apt-get install ros-noetic-dingo-desktop
 \end{lstlisting}
 
 Once your remote access to Dingo's ROS master is configured (see options in \autoref{remote}),
