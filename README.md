@@ -1,6 +1,10 @@
 Dingo User Manual
 ==================
 
+----
+# **NOTE: This manual has been superceded. Find the latest Dingo user manual at [docs.clearpathrobotics.com](https://docs.clearpathrobotics.com/docs/robots/indoor_robots/dingo/user_manual_dingo/).**
+----
+
 This repository contains the LaTeX source code for building the end user product
 documentation for [Dingo](http://www.clearpathrobotics.com/dingo/). If you are
 an end user, please download the official and released version of the manual from
